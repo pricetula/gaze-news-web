@@ -5,6 +5,7 @@
 
 import { NewsApiError } from "./error";
 import { getNewsApiData } from "./getNewsApiData";
+import { Article, NewsResponse } from "./types";
 
 /**
  * Fetches the latest top headlines from the News API.

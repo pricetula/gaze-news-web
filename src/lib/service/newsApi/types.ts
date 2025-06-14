@@ -1,4 +1,4 @@
-interface Article {
+export interface Article {
     source: { id: string | null; name: string };
     author: string | null;
     title: string;
@@ -9,13 +9,13 @@ interface Article {
     content: string | null;
 }
 
-interface NewsResponse {
+export interface NewsResponse {
     status: string;
     totalResults: number;
     articles: Article[];
 }
 
-interface NewSource {
+export interface NewSource {
     id: string;
     name: string;
     description: string;
