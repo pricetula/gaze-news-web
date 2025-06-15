@@ -63,8 +63,8 @@ describe('getNewsApiData', () => {
             json: () => Promise.resolve(mockResponseData),
         });
 
-        const endpoint = '/top-headlines';
-        const params = { country: 'us' };
+        const endpoint = '/everything';
+        const params = { language: 'en' };
 
         // Call the function under test
         const data = await getNewsApiData(endpoint, params);
@@ -87,8 +87,8 @@ describe('getNewsApiData', () => {
             json: async () => ({ code: 'apiKeyInvalid', message: errorMessage }),
         });
 
-        const endpoint = '/top-headlines';
-        const params = { country: 'us' };
+        const endpoint = '/everything';
+        const params = { language: 'en' };
 
         // Assert properties of the thrown error
         try {
@@ -132,7 +132,7 @@ describe('getNewsApiData', () => {
             throw new NewsApiError(getUrlErrorMessage, false, getUrlErrorStatusCode);
         });
 
-        const endpoint = '/top-headlines';
+        const endpoint = '/everything';
         const params = {};
 
         // Assert properties of the propagated error

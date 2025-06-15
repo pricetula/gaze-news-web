@@ -19,9 +19,9 @@ import { Article, NewsResponse } from "./types";
  */
 export async function getTopHeadlines(): Promise<Article[]> {
     const response = await getNewsApiData<NewsResponse>(
-        '/top-headlines',
+        '/everything',
         {
-            country: 'us',
+            language: 'en',
         }
     )
     if (response.status !== "ok") {

@@ -6,33 +6,12 @@ export const authors = pgTable('authors', {
     name: varchar('name', { length: 255 }).notNull(),
 });
 
-// Categories Table
-export const categories = pgTable('categories', {
-    id: varchar('id', { length: 255 }).notNull().primaryKey(),
-    name: varchar('name', { length: 255 }).notNull(),
-});
-
-// Countries Table
-export const countries = pgTable('countries', {
-    id: varchar('id', { length: 255 }).notNull().primaryKey(),
-    name: varchar('name', { length: 255 }).notNull(),
-});
-
-// Languages Table
-export const languages = pgTable('languages', {
-    id: varchar('id', { length: 255 }).notNull().primaryKey(),
-    name: varchar('name', { length: 255 }).notNull(),
-});
-
 // Sources Table
 export const sources = pgTable('sources', {
     id: varchar('id', { length: 255 }).notNull().primaryKey(),
     name: varchar('name', { length: 255 }).notNull(),
     description: text('description'),
     url: text('url').notNull(),
-    categoryId: varchar('category_id', { length: 255 }).references(() => categories.id),
-    languageId: varchar('language_id', { length: 255 }).references(() => languages.id),
-    countryId: varchar('country_id', { length: 255 }).references(() => countries.id),
 });
 
 // Articles Table

@@ -12,7 +12,7 @@ import { NewsApiError } from "./error";
  * a specified endpoint, and any provided query parameters,
  * automatically appending the API key.
  *
- * @param {string} endpoint - The specific API endpoint to call (e.g., '/top-headlines', '/everything').
+ * @param {string} endpoint - The specific API endpoint to call (e.g., '/everything', '/everything').
  * It can start with or without a leading slash.
  * @param {Record<string, string>} params - An object containing key-value pairs of URL query parameters.
  * These parameters will be appended to the URL's search query.

@@ -38,9 +38,9 @@ afterEach(() => {
 describe('getUrl', () => {
     // Test case 1: Successful URL construction with a basic endpoint and no parameters
     it('should construct a valid URL with a basic endpoint and no parameters', () => {
-        const endpoint = '/top-headlines';
+        const endpoint = '/everything';
         const params = {};
-        const expectedUrl = 'https://newsapi.org/v2/top-headlines?apiKey=TEST_API_KEY_123';
+        const expectedUrl = 'https://newsapi.org/v2/everything?apiKey=TEST_API_KEY_123';
         expect(getUrl(endpoint, params)).toBe(expectedUrl);
     });
 
@@ -54,12 +54,12 @@ describe('getUrl', () => {
 
     // Test case 3: Successful URL construction with additional query parameters
     it('should construct a valid URL with additional query parameters', () => {
-        const endpoint = '/top-headlines';
+        const endpoint = '/everything';
         const params = {
-            country: 'us',
+            language: 'en',
             category: 'technology'
         };
-        const expectedUrl = 'https://newsapi.org/v2/top-headlines?apiKey=TEST_API_KEY_123&country=us&category=technology';
+        const expectedUrl = 'https://newsapi.org/v2/everything?apiKey=TEST_API_KEY_123&language=en&category=technology';
         expect(getUrl(endpoint, params)).toBe(expectedUrl);
     });
 
@@ -68,9 +68,8 @@ describe('getUrl', () => {
         const endpoint = 'sources'; // No leading slash
         const params = {
             language: 'en',
-            country: 'gb'
         };
-        const expectedUrl = 'https://newsapi.org/v2/sources?apiKey=TEST_API_KEY_123&language=en&country=gb';
+        const expectedUrl = 'https://newsapi.org/v2/sources?apiKey=TEST_API_KEY_123&language=en';
         expect(getUrl(endpoint, params)).toBe(expectedUrl);
     });
 
@@ -98,7 +97,7 @@ describe('getUrl', () => {
         // Temporarily unset the API key for this specific test
         delete process.env.NEWS_API_KEY;
 
-        const endpoint = '/top-headlines';
+        const endpoint = '/everything';
         const params = {};
 
         // Expect the function to throw an instance of NewsApiError

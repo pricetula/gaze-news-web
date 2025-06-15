@@ -14,7 +14,7 @@ import { getUrl } from "./getUrl"; // Adjust path as per your project structure
  * then performs an HTTP GET request to that URL. It handles potential network
  * errors and non-successful HTTP responses by throwing `NewsApiError` instances.
  *
- * @param {string} endpoint - The News API endpoint (e.g., '/top-headlines', '/everything').
+ * @param {string} endpoint - The News API endpoint (e.g., '/everything', '/everything').
  * @param {Record<string, string>} params - An object containing query parameters for the API request.
  * @returns {Promise<any>} A Promise that resolves with the parsed JSON data from the API response. the type is generic
  * @throws {NewsApiError} If there's a network error, a non-2xx HTTP response from the API,

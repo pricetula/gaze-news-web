@@ -3,7 +3,7 @@
  * It uses Vitest for the testing framework and mocks the `fetch` API.
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { getTopHeadlines } from './getTopHeadlines';
+import { getTopHeadlines } from './getEverything';
 import { NewsApiError } from './error';
 import { after } from 'node:test';
 
@@ -52,7 +52,7 @@ describe('getTopHeadlines', () => {
         const data = await getTopHeadlines();
 
         expect(data).toEqual(mockResponseData.articles);
-        expect(mockFetch).toHaveBeenCalledWith('https://newsapi.org/v2/top-headlines?apiKey=MOCK_API_KEY_FOR_TESTING&country=us');
+        expect(mockFetch).toHaveBeenCalledWith('https://newsapi.org/v2/everything?apiKey=MOCK_API_KEY_FOR_TESTING&language=en');
     });
 
     // Test case 2: News API returns an error response that is not valid JSON
