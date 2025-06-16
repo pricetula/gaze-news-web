@@ -23,6 +23,7 @@ export async function getEverything({
 }: GetEverythingInput): Promise<Article[]> {
     let params: Record<string, string> = {
         language: 'en',
+        pageSize: '100',
     }
     if (keyWords) {
         params.q = keyWords;
