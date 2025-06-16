@@ -1,9 +1,15 @@
 import { NextRequest } from "next/server";
-import * as Sentry from "@sentry/nextjs";
+import * as Sentry from "@sentry/node";
 import { saveArticles } from "@/db/articles/save";
 import { getEverything } from "@/lib/service/newsApi/getEverything";
 import { DBError } from "@/db/error";
 import { NewsApiError } from "@/lib/service/newsApi/error";
+
+
+Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+    sendDefaultPii: true,
+});
 
 // GET request to fetch news from the news api, sync it to our database and return results as response
 export async function GET(request: NextRequest) {
@@ -27,13 +33,6 @@ export async function GET(request: NextRequest) {
     try {
         await saveArticles(await getEverything({ keyWords }));
     } catch(error: any) {
-        if ([DBError, NewsApiError].includes(error.constructor)) {
-            console.log('eeeeeee-------------')
-            // Log the error to sentry
-            Sentry.captureException(error);
-            await Sentry.flush(2000);
-        }
-
         // Throw exception
         return new Response(
             JSON.stringify({ message: "Failed to save articles to database" }),
