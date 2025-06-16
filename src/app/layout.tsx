@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+import { Layout } from "@/components/common/Layout/Layout";
 
 const robotoSans = Roboto({
     subsets: ["latin"],
@@ -41,7 +42,9 @@ export default function RootLayout({
             <body
                 className={`${robotoSans.variable} ${robotoMono.variable} ${libre_baskerville.variable} antialiased`}
             >
-                {children}
+                <Layout>
+                    {children}
+                </Layout>
             </body>
         </html>
     );
