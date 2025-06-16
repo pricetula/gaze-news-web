@@ -1,9 +1,9 @@
 /**
- * This tests getTopHeadlines function to confirm it returns data or throws NewsApiError exceptions
+ * This tests getEverything function to confirm it returns data or throws NewsApiError exceptions
  * It uses Vitest for the testing framework and mocks the `fetch` API.
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { getTopHeadlines } from './getEverything';
+import { getEverything } from './getEverything';
 import { NewsApiError } from './error';
 import { after } from 'node:test';
 
@@ -33,7 +33,7 @@ afterEach(() => {
     vi.clearAllMocks(); // Clears all mocks, including module mocks
 });
 
-describe('getTopHeadlines', () => {
+describe('getEverything', () => {
     // Test case 1: Successful API call with expected data
     it('should fetch data successfully and return parsed JSON', async () => {
         const mockResponseData = {
@@ -49,10 +49,29 @@ describe('getTopHeadlines', () => {
             json: () => Promise.resolve(mockResponseData),
         });
 
-        const data = await getTopHeadlines();
+        const d = new Date('2023-01-01')
+        const textD = d.toISOString()
+
+        const data = await getEverything({
+            keyWords: 'test',
+            from: d,
+            to: d
+        });
+
+        const params = new URLSearchParams({
+            apiKey: 'MOCK_API_KEY_FOR_TESTING',
+            language: 'en',
+            q: 'test',
+            from: textD,
+            to: textD,
+        });
+
+        const url = `https://newsapi.org/v2/everything?${params.toString()}`;
 
         expect(data).toEqual(mockResponseData.articles);
-        expect(mockFetch).toHaveBeenCalledWith('https://newsapi.org/v2/everything?apiKey=MOCK_API_KEY_FOR_TESTING&language=en');
+        expect(mockFetch).toHaveBeenCalledWith(
+            url
+        );
     });
 
     // Test case 2: News API returns an error response that is not valid JSON
@@ -66,7 +85,7 @@ describe('getTopHeadlines', () => {
         });
 
         try {
-            await getTopHeadlines();
+            await getEverything({});
         } catch (error) {
             const newsApiError = error as NewsApiError;
             // The message should indicate HTTP error without specific API message
