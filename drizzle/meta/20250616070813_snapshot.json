@@ -1,5 +1,5 @@
 {
-  "id": "d6c9eeb2-bb95-4838-ace6-fe44d4ef5175",
+  "id": "00749215-1548-471e-9e3d-5ce4548bff78",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -124,18 +124,24 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.categories": {
-      "name": "categories",
+    "public.last_fetched_date": {
+      "name": "last_fetched_date",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
+        "from": {
+          "name": "from",
+          "type": "date",
+          "primaryKey": false,
           "notNull": true
         },
-        "name": {
-          "name": "name",
+        "to": {
+          "name": "to",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "key_words_searched": {
+          "name": "key_words_searched",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
@@ -143,57 +149,16 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.countries": {
-      "name": "countries",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
+      "compositePrimaryKeys": {
+        "last_fetched_date_key_words_searched_from_to_pk": {
+          "name": "last_fetched_date_key_words_searched_from_to_pk",
+          "columns": [
+            "key_words_searched",
+            "from",
+            "to"
+          ]
         }
       },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.languages": {
-      "name": "languages",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -226,68 +191,10 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "category_id": {
-          "name": "category_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "language_id": {
-          "name": "language_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "country_id": {
-          "name": "country_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "sources_category_id_categories_id_fk": {
-          "name": "sources_category_id_categories_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "sources_language_id_languages_id_fk": {
-          "name": "sources_language_id_languages_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "languages",
-          "columnsFrom": [
-            "language_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "sources_country_id_countries_id_fk": {
-          "name": "sources_country_id_countries_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "countries",
-          "columnsFrom": [
-            "country_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

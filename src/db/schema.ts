@@ -1,4 +1,4 @@
-import { pgTable, uuid, varchar, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, varchar, text, timestamp, primaryKey, date } from 'drizzle-orm/pg-core';
 
 // Authors Table
 export const authors = pgTable('authors', {
@@ -27,7 +27,17 @@ export const articles = pgTable('articles', {
     authorId: varchar('author_id', { length: 255 }).notNull().references(() => authors.id),
 });
 
-// Last fetched date Table
-export const lastFetchedDate = pgTable('last_fetched_date', {
-    date: timestamp('date', { withTimezone: true }).notNull(),
-});
+// Last fetched
+export const lastFetchedDate = pgTable(
+    'last_fetched_date',
+    {
+        from: date().notNull(),
+        to: date().notNull(),
+        keyWordsSearched: varchar('key_words_searched', { length: 255 }).notNull(),
+    },
+    (table) => ([
+        primaryKey({
+            columns: [table.keyWordsSearched, table.from, table.to],
+        })
+    ]),
+);
