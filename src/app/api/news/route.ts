@@ -1,15 +1,6 @@
 import { NextRequest } from "next/server";
-import * as Sentry from "@sentry/node";
 import { saveArticles } from "@/db/articles/save";
 import { getEverything } from "@/lib/service/newsApi/getEverything";
-import { DBError } from "@/db/error";
-import { NewsApiError } from "@/lib/service/newsApi/error";
-
-
-Sentry.init({
-    dsn: process.env.SENTRY_DSN,
-    sendDefaultPii: true,
-});
 
 // GET request to fetch news from the news api, sync it to our database and return results as response
 export async function GET(request: NextRequest) {
