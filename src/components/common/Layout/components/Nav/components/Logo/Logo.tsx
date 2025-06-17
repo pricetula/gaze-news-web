@@ -23,7 +23,7 @@ export function Logo() {
                     <Image src={imgSrc} height="24" width="24" alt="Gaze News logo" />
                     : null
             }
-            <span>gaze news</span>
+            <span>gaze</span>
         </a>
     )
 }
