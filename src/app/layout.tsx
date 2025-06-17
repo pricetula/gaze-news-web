@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Libre_Baskerville } from "next/font/google";
+import { Layout } from "@/components/common/Layout/Layout";
 import "./globals.css";
+import { ThemeProvider } from "@/components/common/Layout/ThemeProvider";
 
 const robotoSans = Roboto({
     subsets: ["latin"],
@@ -37,11 +39,20 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
                 className={`${robotoSans.variable} ${robotoMono.variable} ${libre_baskerville.variable} antialiased`}
             >
-                {children}
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <Layout>
+                        {children}
+                    </Layout>
+                </ThemeProvider>
             </body>
         </html>
     );

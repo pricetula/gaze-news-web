@@ -1,9 +1,69 @@
 {
-  "id": "d6c9eeb2-bb95-4838-ace6-fe44d4ef5175",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "7360330f-f8f0-4dd9-927b-de8eb7405d96",
+  "prevId": "00749215-1548-471e-9e3d-5ce4548bff78",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.article_key_words": {
+      "name": "article_key_words",
+      "schema": "",
+      "columns": {
+        "article_id": {
+          "name": "article_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "key_word_id": {
+          "name": "key_word_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "article_key_words_article_id_articles_id_fk": {
+          "name": "article_key_words_article_id_articles_id_fk",
+          "tableFrom": "article_key_words",
+          "tableTo": "articles",
+          "columnsFrom": [
+            "article_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "article_key_words_key_word_id_key_words_id_fk": {
+          "name": "article_key_words_key_word_id_key_words_id_fk",
+          "tableFrom": "article_key_words",
+          "tableTo": "key_words",
+          "columnsFrom": [
+            "key_word_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "article_key_words_article_id_key_word_id_pk": {
+          "name": "article_key_words_article_id_key_word_id_pk",
+          "columns": [
+            "article_id",
+            "key_word_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.articles": {
       "name": "articles",
       "schema": "",
@@ -62,6 +122,12 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -90,6 +156,19 @@
             "id"
           ],
           "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "articles_category_id_categories_id_fk": {
+          "name": "articles_category_id_categories_id_fk",
+          "tableFrom": "articles",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -130,9 +209,44 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(255)",
+          "type": "uuid",
           "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "categories_name_unique": {
+          "name": "categories_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.key_words": {
+      "name": "key_words",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -149,18 +263,24 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.countries": {
-      "name": "countries",
+    "public.last_fetched_date": {
+      "name": "last_fetched_date",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
+        "from": {
+          "name": "from",
+          "type": "date",
+          "primaryKey": false,
           "notNull": true
         },
-        "name": {
-          "name": "name",
+        "to": {
+          "name": "to",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "key_words_searched": {
+          "name": "key_words_searched",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
@@ -168,32 +288,16 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.languages": {
-      "name": "languages",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
+      "compositePrimaryKeys": {
+        "last_fetched_date_key_words_searched_from_to_pk": {
+          "name": "last_fetched_date_key_words_searched_from_to_pk",
+          "columns": [
+            "key_words_searched",
+            "from",
+            "to"
+          ]
         }
       },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -226,68 +330,10 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "category_id": {
-          "name": "category_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "language_id": {
-          "name": "language_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "country_id": {
-          "name": "country_id",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "sources_category_id_categories_id_fk": {
-          "name": "sources_category_id_categories_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "sources_language_id_languages_id_fk": {
-          "name": "sources_language_id_languages_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "languages",
-          "columnsFrom": [
-            "language_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "sources_country_id_countries_id_fk": {
-          "name": "sources_country_id_countries_id_fk",
-          "tableFrom": "sources",
-          "tableTo": "countries",
-          "columnsFrom": [
-            "country_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
