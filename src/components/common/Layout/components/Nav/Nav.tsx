@@ -7,14 +7,9 @@ export function Nav() {
             aria-label="Main navigation"
         >
             {/* Site name and logo */}
-            <a href="/" className="flex items-center font-serif font-bold text-xl" aria-label="Gaze News homepage">
-                <span
-                    className="h-8 w-4 bg-pink-300 flex items-center justify-center"
-                    aria-hidden="true"
-                >
-                    g
-                </span>
-                <span className="ml-.5">aze news</span>
+            <a href="/" className="flex items-center gap-1 font-serif font-bold text-xl" aria-label="Gaze News homepage">
+                <Image src="/logo.svg" height="26" width="26" alt="Gaze News logo" />
+                <span>gaze news</span>
             </a>
 
             {/* Navigation links */}
