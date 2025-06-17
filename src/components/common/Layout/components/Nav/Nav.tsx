@@ -1,5 +1,5 @@
-import Image from "next/image"
 import { ToggleDarkMode } from "./components/ToggleDarkMode"
+import { Logo } from "./components/Logo"
 
 export function Nav() {
     return (
@@ -7,10 +7,7 @@ export function Nav() {
             className="px-8 h-[50px] flex justify-between items-center"
             aria-label="Main navigation"
         >
-            <a href="/" className="flex items-center gap-1 font-serif font-bold text-xl" aria-label="Gaze News homepage">
-                <Image src="/logo.svg" height="26" width="26" alt="Gaze News logo" />
-                <span>gaze news</span>
-            </a>
+            <Logo />
 
             <div className="flex items-center gap-12">
                 <ul className="flex gap-4">
