@@ -13,34 +13,10 @@ export function Nav() {
                 <ul className="flex gap-4">
                     <li>
                         <a
-                            href="/trends"
+                            href="/news"
                             className="text-sm font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
                         >
-                            Trends
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/war"
-                            className="text-sm font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                        >
-                            War
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/politics"
-                            className="text-sm font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                        >
-                            Politics
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            href="/sports"
-                            className="text-sm font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                        >
-                            Sports
+                            News
                         </a>
                     </li>
                 </ul>
