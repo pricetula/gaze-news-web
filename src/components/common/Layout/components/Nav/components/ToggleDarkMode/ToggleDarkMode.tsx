@@ -1,20 +1,15 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React from "react"
+import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 import {
     ToggleGroup,
     ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { LOCAL_STORAGE } from "@/lib/constants"
 
 export function ToggleDarkMode() {
-    useEffect(() => {
-        console.log(
-            "LOCAL_STORAGE.DARK_THEME_KEY",
-            localStorage.getItem(LOCAL_STORAGE.DARK_THEME_KEY)
-        )
-    }, [])
+    const { setTheme } = useTheme()
 
     return (
         <ToggleGroup type="single" size="sm">
@@ -22,10 +17,7 @@ export function ToggleDarkMode() {
                 value="bold"
                 aria-label="Toggle bold"
                 onClick={() => {
-                    localStorage.setItem(
-                        LOCAL_STORAGE.DARK_THEME_KEY,
-                        "true"
-                    )
+                    setTheme('dark')
                 }}
             >
                 <Moon className="h-4 w-4" />
@@ -34,10 +26,7 @@ export function ToggleDarkMode() {
                 value="strikethrough"
                 aria-label="Toggle strikethrough"
                 onClick={() => {
-                    localStorage.setItem(
-                        LOCAL_STORAGE.DARK_THEME_KEY,
-                        "false"
-                    )
+                    setTheme('light')
                 }}
             >
                 <Sun className="h-4 w-4" />
