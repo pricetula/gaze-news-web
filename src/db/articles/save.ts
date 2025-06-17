@@ -66,7 +66,7 @@ export async function saveArticles(articlesFromNewsApi: Article[]) {
     }
 
     try {
-        await db.insert(sources).values(Object.values(sourcesToAdd))
+        await db.insert(sources).values(Object.values(sourcesToAdd)).onConflictDoNothing()
     } catch (error: any) {
         if (error.code !== '23505') {
             throw new DBError(error.message)
@@ -74,7 +74,7 @@ export async function saveArticles(articlesFromNewsApi: Article[]) {
     }
 
     try {
-        await db.insert(authors).values(Object.values(authorsToAdd))
+        await db.insert(authors).values(Object.values(authorsToAdd)).onConflictDoNothing()
     } catch (error: any) {
         if (error.code !== '23505') {
             throw new DBError(error.message)
@@ -82,7 +82,7 @@ export async function saveArticles(articlesFromNewsApi: Article[]) {
     }
 
     try {
-        await db.insert(articles).values(articlesToAdd)
+        await db.insert(articles).values(articlesToAdd).onConflictDoNothing()
     } catch (error: any) {
         if (error.code !== '23505') {
             throw new DBError(error.message)

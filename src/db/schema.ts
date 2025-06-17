@@ -25,6 +25,8 @@ export const articles = pgTable('articles', {
     content: text('content'),
     sourceId: varchar('source_id', { length: 255 }).notNull().references(() => sources.id),
     authorId: varchar('author_id', { length: 255 }).notNull().references(() => authors.id),
+    categoryId: uuid("category_id")
+        .notNull().references(() => categories.id, { onDelete: "cascade" })
 });
 
 // Last fetched
@@ -41,3 +43,31 @@ export const lastFetchedDate = pgTable(
         })
     ]),
 );
+
+// Key words
+export const keyWords = pgTable(
+    'key_words',
+    {
+        id: uuid('id').defaultRandom().notNull().primaryKey(),
+        name: varchar('name', { length: 255 }).notNull(),
+    },
+);
+
+// Article key words
+export const articleKeyWords = pgTable(
+    'article_key_words',
+    {
+        articleId: uuid('article_id').notNull().references(() => articles.id),
+        keyWordId: uuid('key_word_id').notNull().references(() => keyWords.id),
+    },
+    (table) => ([
+        primaryKey({
+            columns: [table.articleId, table.keyWordId],
+        })
+    ]),
+)
+
+export const categories = pgTable("categories", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull().unique(),
+});
