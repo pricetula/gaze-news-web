@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     } catch(error: any) {
         // Throw exception
         return new Response(
-            JSON.stringify({ message: "Failed to save articles to database" }),
+            JSON.stringify({ error }),
             { status: 500 }
         )
     }

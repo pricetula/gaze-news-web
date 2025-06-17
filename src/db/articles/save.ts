@@ -52,6 +52,7 @@ export async function saveArticles(articlesFromNewsApi: Article[]) {
             urlToImage: article.urlToImage,
             publishedAt: new Date(article.publishedAt),
             content: article.content,
+            categoryId: ''
         })
 
         // Map the source to sourcesToAdd collection

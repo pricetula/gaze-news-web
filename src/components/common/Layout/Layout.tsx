@@ -1,4 +1,5 @@
 import React from "react"
+import { Toaster } from "@/components/ui/sonner"
 import { Nav } from "./components/Nav/Nav";
 
 interface LayoutProps {
@@ -14,6 +15,7 @@ export function Layout({ children }: LayoutProps) {
                 {children}
             </section>
             <footer className="px-8 h-[50px]"/>
+            <Toaster />
         </>
     )
 }
