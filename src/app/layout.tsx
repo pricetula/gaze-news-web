@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Libre_Baskerville } from "next/font/google";
 import { Layout } from "@/components/common/Layout/Layout";
-import { ThemeProvider } from "@/components/common/Layout/ThemeProvider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const robotoSans = Roboto({
@@ -35,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 // Create query client for tanstack
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
 export default function RootLayout({
     children,
@@ -47,7 +46,7 @@ export default function RootLayout({
             <body
                 className={`${robotoSans.variable} ${robotoMono.variable} ${libre_baskerville.variable} antialiased`}
             >
-                <QueryClientProvider client={queryClient}>
+                {/* <QueryClientProvider client={queryClient}> */}
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system"
@@ -58,7 +57,7 @@ export default function RootLayout({
                             {children}
                         </Layout>
                     </ThemeProvider>
-                </QueryClientProvider>
+                {/* </QueryClientProvider> */}
             </body>
         </html>
     );

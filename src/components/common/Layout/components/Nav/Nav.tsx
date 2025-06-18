@@ -1,5 +1,5 @@
-import { ToggleDarkMode } from "./components/ToggleDarkMode"
 import { Logo } from "./components/Logo"
+import { Links } from "./components/Links"
 
 export function Nav() {
     return (
@@ -9,20 +9,7 @@ export function Nav() {
         >
             <Logo />
 
-            <div className="flex items-center gap-12">
-                <ul className="flex gap-4">
-                    <li>
-                        <a
-                            href="/news"
-                            className="text-sm font-medium hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
-                        >
-                            News
-                        </a>
-                    </li>
-                </ul>
-                <ToggleDarkMode />
-            </div>
+            <Links />
         </nav>
-
     )
 }
