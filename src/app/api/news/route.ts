@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { saveArticles } from "@/db/articles/save";
+import { saveArticles } from "@/lib/db/articles/save";
 import { getEverything } from "@/lib/service/newsApi/getEverything";
 
 // GET request to fetch news from the news api, sync it to our database and return results as response
