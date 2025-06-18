@@ -17,7 +17,7 @@ export function ToggleDarkMode() {
                 value="bold"
                 aria-label="Toggle bold"
                 onClick={() => {
-                    setTheme('dark')
+                    setTheme("dark")
                 }}
             >
                 <Moon className="h-4 w-4" />
@@ -26,7 +26,7 @@ export function ToggleDarkMode() {
                 value="strikethrough"
                 aria-label="Toggle strikethrough"
                 onClick={() => {
-                    setTheme('light')
+                    setTheme("light")
                 }}
             >
                 <Sun className="h-4 w-4" />

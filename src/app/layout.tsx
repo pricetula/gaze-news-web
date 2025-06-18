@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Libre_Baskerville } from "next/font/google";
 import { Layout } from "@/components/common/Layout/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ReactQueryProvider } from "@/components/common/ReactQueryProvider";
 import "./globals.css";
 
 const robotoSans = Roboto({
@@ -46,7 +47,7 @@ export default function RootLayout({
             <body
                 className={`${robotoSans.variable} ${robotoMono.variable} ${libre_baskerville.variable} antialiased`}
             >
-                {/* <QueryClientProvider client={queryClient}> */}
+                <ReactQueryProvider>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system"
@@ -57,7 +58,7 @@ export default function RootLayout({
                             {children}
                         </Layout>
                     </ThemeProvider>
-                {/* </QueryClientProvider> */}
+                </ReactQueryProvider>
             </body>
         </html>
     );

@@ -32,7 +32,7 @@ const links = [
 export default function Home() {
     return (
         <article className="flex items-center justify-center h-full">
-            <ul className="grid grid-cols-1 md:grid-cols-4">
+            <ul className="grid grid-cols-2 md:grid-cols-4">
                 {
                     links.map(
                         (link) => (
