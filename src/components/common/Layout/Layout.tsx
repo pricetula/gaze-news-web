@@ -14,7 +14,7 @@ export function Layout({ children }: LayoutProps) {
             <section className="px-8 h-[calc(100vh-50px-50px)]">
                 {children}
             </section>
-            <footer className="px-8 h-[50px]"/>
+            <footer className="px-8 h-[50px]" />
             <Toaster />
         </>
     )
