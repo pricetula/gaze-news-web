@@ -8,6 +8,10 @@ import { ToggleDarkMode } from "../ToggleDarkMode"
 
 const links = [
     {
+        label: 'Pics',
+        href: '/pics'
+    },
+    {
         label: 'News',
         href: '/news'
     },
