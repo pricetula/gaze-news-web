@@ -1,14 +1,16 @@
 "use client"
 
 import React from "react";
+import Image from "next/image";
 import { useInfiniteFetchPics } from "@/queries/pics/client-fetch-pics";
-import { Pic } from "./Pic";
 
+/**
+ * Pics component that fetches and displays photos using TanStack Query's infinite query.
+ *
+ * @returns {JSX.Element} - The Pics component.
+ */
 export function Pics() {
     const { data, isLoading, error, hasNextPage, fetchNextPage, isFetchingNextPage } = useInfiniteFetchPics();
-
-    if (isLoading) return <p>Loading photos...</p>;
-    if (error) return <p>Error loading photos.</p>;
 
     const loaderRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -16,6 +18,7 @@ export function Pics() {
         (entries: IntersectionObserverEntry[]) => {
             const target = entries[0];
             if (target.isIntersecting && hasNextPage && !isFetchingNextPage) {
+                console.log("fetching next page");
                 fetchNextPage();
             }
         },
@@ -29,22 +32,35 @@ export function Pics() {
             threshold: 0,
         });
 
-        if (loaderRef.current) observer.observe(loaderRef.current);
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
+        }
 
         return () => observer.disconnect();
     }, [handleObserver]);
 
+    if (isLoading) return <p>Loading photos...</p>;
+    if (error) return <p>Error loading photos.</p>;
+
     return (
         <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
-                {data?.pages?.flatMap((page) => page.photos)?.map(photo => (
-                    <Pic key={photo.id} photo={photo} />
+            <div className="min-h-screen columns-2 md:columns-4 gap-4 space-y-4">
+                {data?.pages?.flatMap((page) => page.photos)?.map((photo, index) => (
+                    <Image
+                        key={photo.id}
+                        width={400}
+                        height={300}
+                        src={photo.src.medium}
+                        blurDataURL={photo.src.tiny}
+                        alt={photo.photographer}
+                    />
                 ))}
-
             </div>
-
-            <div ref={loaderRef} className="h-10 w-full bg-red-500" />
-
+            {
+                data?.pages && data.pages.length > 0 && (
+                    <div ref={loaderRef} className="h-40 w-full" />
+                )
+            }
             {isFetchingNextPage && (
                 <p className="text-center mt-4 text-muted-foreground text-sm">
                     Loading more photos...

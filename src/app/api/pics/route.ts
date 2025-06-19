@@ -1,5 +1,4 @@
 import { NextRequest } from "next/server";
-import { getPhotos } from "@/lib/service/photos";
 
 // GET request to fetch news from the news api, sync it to our database and return results as response
 export async function GET(request: NextRequest) {
@@ -23,12 +22,17 @@ export async function GET(request: NextRequest) {
     try {
         const pageNum = Number(page);
 
-        const r = await getPhotos(pageNum);
-
-        return new Response(JSON.stringify(r), {
+        const r = await fetch(`https://api.pexels.com/v1/curated?per_page=15&page=${pageNum}`, {
+            headers: {
+                Authorization: process.env.PEXELS_API_KEY || '',
+            },
+        });
+        const res = await r.json()
+        console.log(res)
+        return new Response(JSON.stringify(res), {
             headers: { 'Content-Type': 'application/json' },
         });
-    } catch(error: any) {
+    } catch (error: any) {
         // Throw exception
         return new Response(
             JSON.stringify({ error }),
