@@ -7,7 +7,6 @@ export function getPicsQueryConfigs(page: number) {
         queryFn: () => getPics(page),
         refetchInterval: false as false,
         refetchOnWindowFocus: false,
-        staleTime: 1000 * 60 * 5, // 5 minutes
     };
 }
 

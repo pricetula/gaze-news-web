@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
             },
         });
         const res = await r.json()
-        console.log(res)
         return new Response(JSON.stringify(res), {
             headers: { 'Content-Type': 'application/json' },
         });

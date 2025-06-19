@@ -4,12 +4,13 @@ import { Links } from "./components/Links"
 export function Nav() {
     return (
         <nav
-            className="px-8 h-[50px] flex justify-between items-center"
+            className="w-full flex justify-center"
             aria-label="Main navigation"
         >
-            <Logo />
-
-            <Links />
+            <div className="px-8 h-[50px] w-full max-w-[1000px] flex justify-between items-center">
+                <Logo />
+                <Links />
+            </div>
         </nav>
     )
 }
