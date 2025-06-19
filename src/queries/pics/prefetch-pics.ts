@@ -6,5 +6,5 @@ export function prefetchPics(queryClient: QueryClient, page = 1) {
 };
 
 export function prefetchInfinitePics(queryClient: QueryClient) {
-    return queryClient.prefetchInfiniteQuery(picsInfiniteQueryConfigs);
+    return queryClient.ensureInfiniteQueryData(picsInfiniteQueryConfigs);
 };

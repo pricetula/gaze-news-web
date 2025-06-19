@@ -13,7 +13,7 @@ import { PexelsResponse } from "@/types/pexels";
  *   .catch(err => console.error(err));
  */
 export async function getPics(page: number): Promise<PexelsResponse> {
-    const response = await fetch(`api/pics?page=${page}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_WEB_APP_URL}/api/pics?page=${page}`, {
         headers: {
             Authorization: process.env.PEXELS_API_KEY || '',
         },
