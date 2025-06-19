@@ -1,4 +1,5 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 import { prefetchInfinitePics } from "@/queries/pics/prefetch-pics";
 import { Pics } from "@/features/pics/Pics";
 import { getQueryClient } from "@/lib/react-query";
@@ -10,7 +11,9 @@ export default async function Page() {
 
     return (
         <HydrationBoundary state={dehydratedState}>
+            <ReactQueryStreamedHydration>
             <Pics />
+            </ReactQueryStreamedHydration>
         </HydrationBoundary>
     );
 }
