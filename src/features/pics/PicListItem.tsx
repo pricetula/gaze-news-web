@@ -1,19 +1,20 @@
 import React from "react"
 import Image from "next/image"
 import { PexelsPhoto } from "@/types/pexels"
-import { PicListItemLoading } from "./PicListItemLoading"
+import { extractDimensionsFromPexelsUrl } from "./utils"
 
 export function PicListItem({ photo }: { photo: PexelsPhoto }) {
+    const dimensions = extractDimensionsFromPexelsUrl(photo.src.medium)
     return (
-        <React.Suspense fallback={<PicListItemLoading />}>
-            <Image
-                key={photo.id}
-                width={400}
-                height={300}
-                src={photo.src.medium}
-                blurDataURL={photo.src.tiny}
-                alt={photo.photographer}
-            />
-        </React.Suspense>
+        <Image
+            key={photo.id}
+            width={dimensions.width}
+            height={dimensions.height}
+            src={photo.src.medium}
+            blurDataURL={photo.blurDataURL}
+            alt={photo.photographer}
+            loading="lazy"
+            placeholder="blur"
+        />
     )
 }

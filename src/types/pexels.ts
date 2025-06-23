@@ -21,6 +21,7 @@ export interface PexelsPhoto {
     src: PexelsPhotoSrc;
     liked: boolean;
     alt: string;
+    blurDataURL?: string;
 }
 
 export interface PexelsResponse {
